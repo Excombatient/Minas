@@ -21,7 +21,7 @@ public class Minas extends Application {
     @Override
     public void start(Stage primaryStage) {
         Button btn = new Button();
-        btn.setText("Say 'Hello World'");
+        btn.setText("Start");
         btn.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
@@ -33,9 +33,9 @@ public class Minas extends Application {
         StackPane root = new StackPane();
         root.getChildren().add(btn);
         
-        Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(root, 500, 500);
         
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Buscaminas");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -45,7 +45,6 @@ public class Minas extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-        // patata
     }
     
 }
