@@ -5,6 +5,7 @@
  */
 package minas;
 
+import java.util.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javax.swing.AbstractButton;
 
 /**
  *
@@ -21,6 +23,9 @@ import javafx.stage.Stage;
 public class Minas extends Application {
     @Override
     public void start(Stage primaryStage) {
+        List<String> bombs = new ArrayList<>();
+        Random R = new Random();
+        R.rand(bombs);
         Pane root = new Pane();
         for(int i = 3;i<20;i++){
             for(int n = 0; n<20; n++){
@@ -30,14 +35,17 @@ public class Minas extends Application {
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                    System.out.println("Position: "+ btn.getPos());
+                        if (!btn.isUsed()){
+                            System.out.println("Position: "+ btn.getPos());
+                            System.out.println("Compare to: "+btn.compareTo(bombs));
+                            btn.setUsed(true);
+                        }
                    }
                 });
                 btn.setLayoutX(25*n);
-                btn.setLayoutY(25*i); 
+                btn.setLayoutY(25*i);
                 root.getChildren().add(btn);
             }
-            
         }
         
         Scene scene = new Scene(root, 500, 500);
@@ -54,4 +62,17 @@ public class Minas extends Application {
         launch(args);
     }
     
-}
+        class Random{
+            public List<String> rand(List<String> A){
+                for(int i = 0; i<10;i++){
+                   A.add(randomizer(0,16)+"-"+randomizer(0,19));
+                   System.out.println(A.get(A.size()-1));
+                }
+                return A;
+            }
+            public int randomizer(int min, int max){
+                return(min + (int)(Math.random() * ((max - min) + 1)));
+                }
+            
+        }
+}   
