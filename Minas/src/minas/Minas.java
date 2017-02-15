@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -23,6 +24,7 @@ import javax.swing.AbstractButton;
 public class Minas extends Application {
     @Override
     public void start(Stage primaryStage) {
+        Map<String,Rectangle> Mapa = new HashMap();
         List<String> bombs = new ArrayList<>();
         Random R = new Random();
         R.rand(bombs);
@@ -31,17 +33,17 @@ public class Minas extends Application {
             for(int n = 0; n<20; n++){
                 Rectangle btn = new Rectangle();
                 btn.setText("   ");
-                btn.setPos((i-3)+"-"+n);  
+                btn.setPos((i-3)+"-"+n);
+                btn.compareTo(bombs);
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
                         if (!btn.isUsed()){
-                            System.out.println("Position: "+ btn.getPos());
-                            System.out.println("Compare to: "+btn.compareTo(bombs));
-                            btn.setUsed(true);
+                            btn.selectRect();
                         }
                    }
                 });
+                Mapa.put(btn.getPos(), btn);
                 btn.setLayoutX(25*n);
                 btn.setLayoutY(25*i);
                 root.getChildren().add(btn);
@@ -49,7 +51,16 @@ public class Minas extends Application {
         }
         
         Scene scene = new Scene(root, 500, 500);
-        
+        /*root.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        if (!event.getSource()b .isUsed()){
+                            System.out.println("Position: "+ event.getSource().getPos());
+                            System.out.println("Compare to: "+event.compareTo(bombs));
+                            event.setUsed(true);
+                        }
+                   }
+                });*/
         primaryStage.setTitle("Buscaminas");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -73,6 +84,5 @@ public class Minas extends Application {
             public int randomizer(int min, int max){
                 return(min + (int)(Math.random() * ((max - min) + 1)));
                 }
-            
         }
 }   

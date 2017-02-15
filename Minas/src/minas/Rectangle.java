@@ -14,7 +14,7 @@ import javafx.scene.control.Button;
  */
 public class Rectangle extends Button implements Comparable<List<String>>{
     private String pos;
-    private int Minas;
+    private int Minas=0;
     private boolean used;
 
     public boolean isUsed() {
@@ -40,18 +40,29 @@ public class Rectangle extends Button implements Comparable<List<String>>{
     public void setPos(String pos) {
         this.pos = pos;
     }
+    
+    public void selectRect(){
+        System.out.println("Position: "+ this.getPos());
+        this.setText(" "+ this.getMinas());
+        this.setUsed(true);
+    }
 
     @Override
     public int compareTo(List<String> other){
+        String[] T = this.getPos().split("-");
         for(int i=0; other.size() > i;i++){
-            int a = Integer.parseInt(this.getPos().replace("-", "")) - Integer.parseInt(other.get(i).replace("-", ""));
-            if(Integer.compare(Integer.parseInt(this.getPos().replace("-", "")), Integer.parseInt(other.get(i).replace("-", ""))) == 0){
+            String[] O = other.get(i).split("-");
+            int a = Integer.parseInt(T[0]) - Integer.parseInt(O[0]);
+            int b = Integer.parseInt(T[1]) - Integer.parseInt(O[1]);
+            if(Integer.compare(a , 0)==0 && Integer.compare(b , 0)==0){    
+                this.setMinas(-1);
+                 System.out.println(other.get(i)+"---"+this.getPos());
                 return 0;
-            }else if( a == 11 || a == 10 || a == 9 || a == 1 || a == -11 || a == -10 || a == -9 || a == -1){
-                this.setMinas(this.getMinas()+1);                
+            }else if( (a == 0 && b == 1) || (a == 0 && b == -1) || (a == 1) && (b == 1) || (a == 1 && b == -1) || (a == 1 && b == 0) || (a == -1 && b == 1) || (a == -1 && b == -1) || (a == -1 && b == 0)){
+                this.setMinas(this.getMinas()+1);
+            }else{
             }
         }
-        this.setText(" "+ this.getMinas()+ " ");
-        return 0;
+        return (this.getMinas());
     }
 }
