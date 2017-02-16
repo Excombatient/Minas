@@ -43,7 +43,10 @@ public class Rectangle extends Button implements Comparable<List<String>>{
     
     public void selectRect(){
         System.out.println("Position: "+ this.getPos());
-        this.setText(" "+ this.getMinas());
+        if(this.getMinas()==-1)
+            this.setText(" B ");
+        else
+            this.setText(" "+ this.getMinas());
         this.setUsed(true);
     }
 
