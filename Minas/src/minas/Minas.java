@@ -67,6 +67,8 @@ public class Minas extends Application {
                 //actiontarget.setFill(Color.FIREBRICK);
                // actiontarget.setText("Signed"+" "+userTextField.getText());
                   Pane root = new Pane();
+                  Text scenetitle = new Text("Buscaminas");
+                  scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
                     for(int i = 3;i<20;i++){
                         for(int n = 0; n<20; n++){
                             Rectangle btn = new Rectangle();
