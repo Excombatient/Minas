@@ -40,6 +40,7 @@ public class Minas extends Application {
                     public void handle(ActionEvent event) {
                         if (!btn.isUsed()){
                             btn.selectRect();
+                            //Mirar per si minas es 0, mostrar els costats i així tota l'estona
                         }
                    }
                 });
