@@ -41,6 +41,7 @@ public class Minas extends Application {
                         if (!btn.isUsed()){
                             btn.selectRect();
                             //Mirar per si minas es 0, mostrar els costats i així tota l'estona
+                            //comprobar que funciona el author
                         }
                    }
                 });
