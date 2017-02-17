@@ -5,7 +5,9 @@
  */
 package minas;
 
+
 import java.util.List;
+import java.util.Map;
 import javafx.scene.control.Button;
 
 /**
@@ -15,8 +17,11 @@ import javafx.scene.control.Button;
 public class Rectangle extends Button implements Comparable<List<String>>{
     private String pos;
     private int Minas=0;
+    private int checks=0;
     private boolean used;
-
+    
+    Map<String,Rectangle> Mapa = MapaMinas.MapaMinas.getMapa();
+    
     public boolean isUsed() {
         return used;
     }
@@ -43,10 +48,30 @@ public class Rectangle extends Button implements Comparable<List<String>>{
     
     public void selectRect(){
         System.out.println("Position: "+ this.getPos());
-        if(this.getMinas()==-1)
-            this.setText(" B ");
-        else
-            this.setText(" "+ this.getMinas());
+        switch (this.getMinas()) {
+            case -1:
+                this.setText(" B ");
+                break;
+            case 0:
+                String[] T = getPos().split("-");
+                if (Integer.parseInt(T[1])<19 && Integer.parseInt(T[1])>0 && checks==0){
+                checks++;   
+                this.setText(" "+ this.getMinas());
+                Mapa.get(T[0]+"-"+Integer.toString((Integer.parseInt(T[1])+1))).selectRect();
+                Mapa.get(T[0]+"-"+Integer.toString((Integer.parseInt(T[1])-1))).selectRect();
+                }
+                
+                if (Integer.parseInt(T[0])<16 && Integer.parseInt(T[0])>0 && checks==1){   
+                checks++;   
+                this.setText(" "+ this.getMinas());
+                Mapa.get(Integer.toString((Integer.parseInt(T[0])+1))+"-"+T[1]).selectRect();
+                Mapa.get(Integer.toString((Integer.parseInt(T[0])-1))+"-"+T[1]).selectRect();
+                }
+                break;
+            default:
+                this.setText(" "+ this.getMinas());
+                break;
+        }
         this.setUsed(true);
     }
 
