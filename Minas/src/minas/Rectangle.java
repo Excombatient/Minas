@@ -54,19 +54,23 @@ public class Rectangle extends Button implements Comparable<List<String>>{
                 break;
             case 0:
                 String[] T = getPos().split("-");
-                if (Integer.parseInt(T[1])<19 && Integer.parseInt(T[1])>0 && checks==0){
+                if (Integer.parseInt(T[1])<=19 && Integer.parseInt(T[1])>=0 && checks==0){
                 checks++;   
                 this.setText(" "+ this.getMinas());
-                Mapa.get(T[0]+"-"+Integer.toString((Integer.parseInt(T[1])+1))).selectRect();
-                Mapa.get(T[0]+"-"+Integer.toString((Integer.parseInt(T[1])-1))).selectRect();
+                if(Integer.parseInt(T[1]) != 0 && Integer.parseInt(T[1]) != 19){
+                    Mapa.get(T[0]+"-"+Integer.toString((Integer.parseInt(T[1])+1))).selectRect();
+                    Mapa.get(T[0]+"-"+Integer.toString((Integer.parseInt(T[1])-1))).selectRect();
                 }
+            }
                 
-                if (Integer.parseInt(T[0])<16 && Integer.parseInt(T[0])>0 && checks==1){   
+                if (Integer.parseInt(T[0])<16 && Integer.parseInt(T[0])>=0 && checks==1){   
                 checks++;   
                 this.setText(" "+ this.getMinas());
-                Mapa.get(Integer.toString((Integer.parseInt(T[0])+1))+"-"+T[1]).selectRect();
-                Mapa.get(Integer.toString((Integer.parseInt(T[0])-1))+"-"+T[1]).selectRect();
+                if(Integer.parseInt(T[0]) != 0){
+                    Mapa.get(Integer.toString((Integer.parseInt(T[0])+1))+"-"+T[1]).selectRect();
+                    Mapa.get(Integer.toString((Integer.parseInt(T[0])-1))+"-"+T[1]).selectRect();
                 }
+            }
                 break;
             default:
                 this.setText(" "+ this.getMinas());
