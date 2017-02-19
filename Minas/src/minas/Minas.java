@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package minas;
 
+import MapaMinas.*;
+import java.util.*;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
@@ -13,6 +10,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -23,6 +21,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javax.swing.AbstractButton;
 
 /**
  *
@@ -66,38 +65,22 @@ public class Minas extends Application {
             public void handle(ActionEvent e){
                 //actiontarget.setFill(Color.FIREBRICK);
                // actiontarget.setText("Signed"+" "+userTextField.getText());
-                  Pane root = new Pane();
-                  Text scenetitle = new Text("Buscaminas");
                   scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-                    for(int i = 3;i<20;i++){
-                        for(int n = 0; n<20; n++){
-                            Rectangle btn = new Rectangle();
-                            btn.setText("   ");
-                            btn.setPos((i-3)+"-"+n);  
-                            btn.setOnAction(new EventHandler<ActionEvent>() {
-                                @Override
-                                public void handle(ActionEvent event) {
-                                System.out.println("Position: "+ btn.getPos());
-                               }
-                            });
-                            btn.setLayoutX(25*n);
-                            btn.setLayoutY(25*i); 
-                            root.getChildren().add(btn);
-                        }
-
-                    }
-
-                    Scene scene = new Scene(root, 500, 500);
-
-                    primaryStage.setTitle("Buscaminas");
-                    primaryStage.setScene(scene);
-                    primaryStage.show();
+                    
+                  App Aplication = new App();
+        //new Thread(Aplication.start());
+                  Thread t = new Thread(Aplication);
+                  t.start();
+                  Aplication.build();
+                  primaryStage.setTitle("Buscaminas");
+                  primaryStage.setScene(Aplication.getScene());
               
             }
         });
-        
         primaryStage.show();
     }
+
+    
 
     /**
      * @param args the command line arguments
