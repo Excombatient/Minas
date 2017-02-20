@@ -24,6 +24,7 @@ import javafx.scene.layout.Pane;
 public class App extends MapaMinas implements Runnable{
     private Scene scene;
     private int sec=0;
+    private int NsPillao=0;
     
     public void build(){
         List<String> bombs = new ArrayList<>();
@@ -47,7 +48,18 @@ public class App extends MapaMinas implements Runnable{
                             btn.selectRect();
                         }
                     }else if(button==MouseButton.SECONDARY){
-                        btn.setText("?");
+                        if (!btn.isUsed() && btn.getMinas()==-1){
+                            btn.setText("?");
+                            NsPillao++;
+                        }else if (btn.isUsed() && btn.getMinas()==-1){
+                            btn.setText("   ");
+                            NsPillao--;
+                        }else if(!btn.isUsed()){
+                            btn.setText("?");
+                        }else if(btn.getText()=="?"){
+                            btn.setText("   ");
+                        }
+                        
                     }
                 });
                 Mapa.put(btn.getPos(), btn);
