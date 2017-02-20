@@ -27,8 +27,7 @@ import javax.swing.AbstractButton;
  *
  * @author JJ
  */
-public class Minas extends Application {
-    
+public class Minas extends Application{
     @Override
     public void start(Stage primaryStage) {
         GridPane grid = new GridPane();
@@ -66,9 +65,7 @@ public class Minas extends Application {
                 //actiontarget.setFill(Color.FIREBRICK);
                // actiontarget.setText("Signed"+" "+userTextField.getText());
                   scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-                    
                   App Aplication = new App();
-        //new Thread(Aplication.start());
                   Thread t = new Thread(Aplication);
                   t.start();
                   Aplication.build();
@@ -88,4 +85,4 @@ public class Minas extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-}
+}   
