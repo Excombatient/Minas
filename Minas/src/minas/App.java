@@ -16,6 +16,19 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.beans.binding.Bindings;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 /**
  *
@@ -34,6 +47,7 @@ public class App extends MapaMinas implements Runnable{
         Rectangle btn1 = new Rectangle();
         btn1.setLayoutX(10);
         btn1.setLayoutY(10);
+        btn1.setStyle("-fx-base: #b6e7c9;");
         root.getChildren().add(btn1);
         for(int i = 3;i<20;i++){
             for(int n = 0; n<20; n++){
@@ -48,16 +62,21 @@ public class App extends MapaMinas implements Runnable{
                             btn.selectRect();
                         }
                     }else if(button==MouseButton.SECONDARY){
-                        if (!btn.isUsed() && btn.getMinas()==-1){
-                            btn.setText("?");
-                            NsPillao++;
-                        }else if (btn.isUsed() && btn.getMinas()==-1){
+                        if(!btn.isUsed() && !btn.isCould()){
+                            btn.setText(" ? ");
+                            btn.setStyle("-fx-base: #FF0000;");
+                            btn.setCould(true);
+                            btn.setUsed(true);
+                            if(btn.getMinas()==-1)
+                              NsPillao++;  
+                            
+                        }else if(btn.isUsed()){
                             btn.setText("   ");
-                            NsPillao--;
-                        }else if(!btn.isUsed()){
-                            btn.setText("?");
-                        }else if(btn.getText()=="?"){
-                            btn.setText("   ");
+                            btn.setCould(false);
+                            btn.setUsed(false);
+                            btn.setStyle("-fx-base: #F0E7E7;");
+                            if(btn.getMinas()==-1)
+                              NsPillao--;
                         }
                         
                     }
@@ -68,7 +87,6 @@ public class App extends MapaMinas implements Runnable{
                 root.getChildren().add(btn);
             }
         }
-        
         scene = new Scene(root, 500, 500);
     }
 
