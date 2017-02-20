@@ -11,7 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 /**
@@ -27,16 +30,24 @@ public class App extends MapaMinas implements Runnable{
         App.Random R = new App.Random();
         R.rand(bombs);
         Pane root = new Pane();
+        Rectangle btn1 = new Rectangle();
+        btn1.setLayoutX(10);
+        btn1.setLayoutY(10);
+        root.getChildren().add(btn1);
         for(int i = 3;i<20;i++){
             for(int n = 0; n<20; n++){
                 Rectangle btn = new Rectangle();
                 btn.setText("   ");
                 btn.setPos((i-3)+"-"+n);
                 btn.compareTo(bombs);
-                btn.setOnAction((ActionEvent event) -> {
-                    if (!btn.isUsed()){
-                        btn.selectRect();
-                        //Mirar per si minas es 0, mostrar els costats i així tota l'estona
+                btn.setOnMouseClicked((MouseEvent event) -> {
+                    MouseButton button = event.getButton();
+                    if(button==MouseButton.PRIMARY){
+                        if (!btn.isUsed()){
+                            btn.selectRect();
+                        }
+                    }else if(button==MouseButton.SECONDARY){
+                        btn.setText("?");
                     }
                 });
                 Mapa.put(btn.getPos(), btn);
