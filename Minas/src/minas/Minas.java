@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -71,7 +72,6 @@ public class Minas extends Application{
                   Aplication.build();
                   primaryStage.setTitle("Buscaminas");
                   primaryStage.setScene(Aplication.getScene());
-              
             }
         });
         primaryStage.show();

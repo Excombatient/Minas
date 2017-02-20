@@ -68,9 +68,9 @@ public class App extends MapaMinas implements Runnable{
                             btn.setCould(true);
                             btn.setUsed(true);
                             if(btn.getMinas()==-1)
-                              NsPillao++;  
+                              NsPillao++;
                             
-                        }else if(btn.isUsed()){
+                        }else if(btn.isUsed() && btn.isCould()){
                             btn.setText("   ");
                             btn.setCould(false);
                             btn.setUsed(false);
