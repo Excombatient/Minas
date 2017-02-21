@@ -12,8 +12,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Skin;
 
 /**
- *
+ * Declaracion clase Rectangle
  * @author Marc
+ * @version 19/02/17
  */
 public class Rectangle extends Button implements Comparable<List<String>>{
     private String pos;
@@ -32,30 +33,51 @@ public class Rectangle extends Button implements Comparable<List<String>>{
         this.Could = Could;
     }
     
+       /**
+     * metodo 
+     * @return used 
+     */
     public boolean isUsed() {
         return Used;
     }
-
+     /**
+     * metodo del constructor
+     * @param used 
+     */
     public void setUsed(boolean used) {
         this.Used = used;
     }  
-
+    /**
+     * metodo para obtener minas
+     * @return int Minas
+     */
     public int getMinas() {
         return Minas;
     }
-
+    /**
+     * metodo para obtener minas
+     * @param Minas 
+     */
     public void setMinas(int Minas) {
         this.Minas = Minas;
     }
-
+    /**
+     * metodo para obtener pos (posicion)
+     * @return String pos
+     */
     public String getPos() {
         return pos;
     }
-
+    /**
+     * metodo
+     * @param pos 
+     */
     public void setPos(String pos) {
         this.pos = pos;
     }
-    
+    /**
+     * Classe para obtener las minas con la posicion
+     */
     public void selectRect(){
         System.out.println("Position: "+ this.getPos());
         switch (this.getMinas()) {

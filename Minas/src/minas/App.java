@@ -29,26 +29,32 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.scene.control.Label;
 
 /**
  *
- * @author Marc
+ * @author MarcS
  */
 public class App extends MapaMinas implements Runnable{
     private Scene scene;
     private int sec=0;
     private int NsPillao=0;
+    private Label uTe = new Label();
+    private Label uTe2 = new Label();
     
     public void build(){
         List<String> bombs = new ArrayList<>();
         App.Random R = new App.Random();
         R.rand(bombs);
         Pane root = new Pane();
-        Rectangle btn1 = new Rectangle();
-        btn1.setLayoutX(10);
-        btn1.setLayoutY(10);
-        btn1.setStyle("-fx-base: #b6e7c9;");
-        root.getChildren().add(btn1);
+        String uname = "";
+        uname = Minas.rename();
+        root.getChildren().add(uTe);
+        uTe.setText("user: " + uname);
+        String punts = "";
+        punts = Minas.rename();
+        root.getChildren().add(uTe2);
+        uTe.setText("punts: " + punts);
         for(int i = 3;i<20;i++){
             for(int n = 0; n<20; n++){
                 Rectangle btn = new Rectangle();

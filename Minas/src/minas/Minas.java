@@ -29,8 +29,11 @@ import javax.swing.AbstractButton;
  * @author JJ
  */
 public class Minas extends Application{
+    private static String name = "";
+    private static String punt = "";
     @Override
     public void start(Stage primaryStage) {
+        Persona user = new Persona();
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
@@ -44,7 +47,7 @@ public class Minas extends Application{
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0 , 2, 1);
         
-        Label userName = new Label("User Name: ");
+        Label userName = new Label("User : ");
         grid.add(userName, 0, 1);
         
         TextField userTextField = new TextField();
@@ -63,6 +66,9 @@ public class Minas extends Application{
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e){
+            String u = userTextField.getText();
+            name = u;
+            System.out.println("user: " +name);
                 //actiontarget.setFill(Color.FIREBRICK);
                // actiontarget.setText("Signed"+" "+userTextField.getText());
                   scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
@@ -72,12 +78,18 @@ public class Minas extends Application{
                   Aplication.build();
                   primaryStage.setTitle("Buscaminas");
                   primaryStage.setScene(Aplication.getScene());
+                  user.creaxml();
+                  Puntuacio.leeXML();
             }
         });
         primaryStage.show();
     }
-
-    
+   public static String rename(){
+        return name;
+    }
+       public static String punts(){
+        return punt;
+    }
 
     /**
      * @param args the command line arguments
