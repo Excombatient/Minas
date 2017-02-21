@@ -11,8 +11,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.beans.binding.Bindings;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.scene.control.Label;
 
 /**
@@ -22,6 +38,7 @@ import javafx.scene.control.Label;
 public class App extends MapaMinas implements Runnable{
     private Scene scene;
     private int sec=0;
+    private int NsPillao=0;
     private Label uTe = new Label();
     private Label uTe2 = new Label();
     
@@ -44,10 +61,30 @@ public class App extends MapaMinas implements Runnable{
                 btn.setText("   ");
                 btn.setPos((i-3)+"-"+n);
                 btn.compareTo(bombs);
-                btn.setOnAction((ActionEvent event) -> {
-                    if (!btn.isUsed()){
-                        btn.selectRect();
-                        //Mirar per si minas es 0, mostrar els costats i així tota l'estona
+                btn.setOnMouseClicked((MouseEvent event) -> {
+                    MouseButton button = event.getButton();
+                    if(button==MouseButton.PRIMARY){
+                        if (!btn.isUsed()){
+                            btn.selectRect();
+                        }
+                    }else if(button==MouseButton.SECONDARY){
+                        if(!btn.isUsed() && !btn.isCould()){
+                            btn.setText(" ? ");
+                            btn.setStyle("-fx-base: #FF0000;");
+                            btn.setCould(true);
+                            btn.setUsed(true);
+                            if(btn.getMinas()==-1)
+                              NsPillao++;
+                            
+                        }else if(btn.isUsed() && btn.isCould()){
+                            btn.setText("   ");
+                            btn.setCould(false);
+                            btn.setUsed(false);
+                            btn.setStyle("-fx-base: #F0E7E7;");
+                            if(btn.getMinas()==-1)
+                              NsPillao--;
+                        }
+                        
                     }
                 });
                 Mapa.put(btn.getPos(), btn);
@@ -56,7 +93,6 @@ public class App extends MapaMinas implements Runnable{
                 root.getChildren().add(btn);
             }
         }
-        
         scene = new Scene(root, 500, 500);
     }
 

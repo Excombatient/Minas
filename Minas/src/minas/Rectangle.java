@@ -9,6 +9,7 @@ package minas;
 import java.util.List;
 import java.util.Map;
 import javafx.scene.control.Button;
+import javafx.scene.control.Skin;
 
 /**
  * Declaracion clase Rectangle
@@ -19,23 +20,32 @@ public class Rectangle extends Button implements Comparable<List<String>>{
     private String pos;
     private int Minas=0;
     private int checks=0;
-    private boolean used;
+    private boolean Used;
+    private boolean Could;
     
     Map<String,Rectangle> Mapa = MapaMinas.MapaMinas.getMapa();
+
+    public boolean isCould() {
+        return Could;
+    }
+
+    public void setCould(boolean Could) {
+        this.Could = Could;
+    }
     
        /**
      * metodo 
      * @return used 
      */
     public boolean isUsed() {
-        return used;
+        return Used;
     }
      /**
      * metodo del constructor
      * @param used 
      */
     public void setUsed(boolean used) {
-        this.used = used;
+        this.Used = used;
     }  
     /**
      * metodo para obtener minas
@@ -77,29 +87,38 @@ public class Rectangle extends Button implements Comparable<List<String>>{
             case 0:
                 String[] T = getPos().split("-");
                 if (Integer.parseInt(T[1])<=19 && Integer.parseInt(T[1])>=0 && checks==0){
-                checks++;   
-                this.setText(" "+ this.getMinas());
-                if(Integer.parseInt(T[1]) != 0 && Integer.parseInt(T[1]) != 19){
-                    Mapa.get(T[0]+"-"+Integer.toString((Integer.parseInt(T[1])+1))).selectRect();
-                    Mapa.get(T[0]+"-"+Integer.toString((Integer.parseInt(T[1])-1))).selectRect();
+                    checks++;
+                    if(!this.isCould())
+                        this.setText(" "+ (this.getMinas()!=0?this.getMinas():"  "));
+                    if(Integer.parseInt(T[1]) != 0 && Integer.parseInt(T[1]) != 19){
+                        Mapa.get(T[0]+"-"+Integer.toString((Integer.parseInt(T[1])+1))).selectRect();
+                        Mapa.get(T[0]+"-"+Integer.toString((Integer.parseInt(T[1])-1))).selectRect();
+                    }
                 }
-            }
                 
                 if (Integer.parseInt(T[0])<16 && Integer.parseInt(T[0])>=0 && checks==1){   
-                checks++;   
-                this.setText(" "+ this.getMinas());
-                if(Integer.parseInt(T[0]) != 0){
-                    Mapa.get(Integer.toString((Integer.parseInt(T[0])+1))+"-"+T[1]).selectRect();
-                    Mapa.get(Integer.toString((Integer.parseInt(T[0])-1))+"-"+T[1]).selectRect();
+                    checks++;   
+                    this.setText(" "+ (this.getMinas()!=0?this.getMinas():"  "));
+                    if(Integer.parseInt(T[0]) != 0){
+                        Mapa.get(Integer.toString((Integer.parseInt(T[0])+1))+"-"+T[1]).selectRect();
+                        Mapa.get(Integer.toString((Integer.parseInt(T[0])-1))+"-"+T[1]).selectRect();
+                    }
                 }
-            }
                 break;
             default:
                 this.setText(" "+ this.getMinas());
                 break;
         }
+        this.setStyle("-fx-base: #FFFFFF;");
         this.setUsed(true);
     }
+
+    @Override
+    protected Skin<?> createDefaultSkin() {
+        return super.createDefaultSkin(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 
     @Override
     public int compareTo(List<String> other){
@@ -110,13 +129,18 @@ public class Rectangle extends Button implements Comparable<List<String>>{
             int b = Integer.parseInt(T[1]) - Integer.parseInt(O[1]);
             if(Integer.compare(a , 0)==0 && Integer.compare(b , 0)==0){    
                 this.setMinas(-1);
-                 System.out.println(other.get(i)+"---"+this.getPos());
+                System.out.println(other.get(i)+"---"+this.getPos());
                 return 0;
             }else if( (a == 0 && b == 1) || (a == 0 && b == -1) || (a == 1) && (b == 1) || (a == 1 && b == -1) || (a == 1 && b == 0) || (a == -1 && b == 1) || (a == -1 && b == -1) || (a == -1 && b == 0)){
                 this.setMinas(this.getMinas()+1);
             }else{
+                
             }
         }
         return (this.getMinas());
     }
 }
+
+
+
+
