@@ -79,8 +79,7 @@ public class Minas extends Application{
                   Aplication.build();
                   primaryStage.setTitle("Buscaminas");
                   primaryStage.setScene(Aplication.getScene());
-                  user.creaxml();
-                  Puntuacio.leeXML();
+                  user.creaxml(); 
                   txt.createTXT();
             }
         });
