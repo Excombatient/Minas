@@ -115,7 +115,7 @@ public class App extends MapaMinas implements Runnable{
         while(true){
             try{
                 sec++;
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException iex) {
                 System.out.println("Exception in var sec thread: "+iex.getMessage());
             }

@@ -29,8 +29,9 @@ import javax.swing.AbstractButton;
  * @author JJ
  */
 public class Minas extends Application{
-    private static String name = "";
-    private static String punt = "";
+    private static String name;
+    private static String punt;
+    StageManage<Stage> Main = new StageManage();
     @Override
     public void start(Stage primaryStage) {
         Persona user = new Persona();
@@ -41,7 +42,8 @@ public class Minas extends Application{
         grid.setPadding(new Insets(25, 25, 25, 25));
         
         Scene scene = new Scene(grid, 300, 275);
-        primaryStage.setScene(scene);
+        Main.setMainStage(primaryStage);
+        Main.getMainStage().setScene(scene);
         
         Text scenetitle = new Text("Minas");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
@@ -82,15 +84,20 @@ public class Minas extends Application{
                   Puntuacio.leeXML();
             }
         });
+        
         primaryStage.show();
     }
-   public static String rename(){
+    public void setScene(Scene scene){
+        Main.getMainStage().setScene(scene);
+    }
+    
+    public static String rename(){
         return name;
     }
-       public static String punts(){
+    
+    public static String punts(){
         return punt;
     }
-
     /**
      * @param args the command line arguments
      */
