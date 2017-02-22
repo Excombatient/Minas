@@ -22,8 +22,8 @@ public class text {
     File TextFile = new File("puntuacion.txt"); 
     FileWriter writer = new FileWriter(TextFile, true);
     //PrintWriter writer = new PrintWriter("puntuacion.txt", "UTF-8");
-    writer.write("User: "+uname +"   ");
-    writer.write("Puntuacio: "+puntos+"------");
+    writer.write("User: "+uname+"   ");
+    writer.write("Puntuacio: "+puntos+"\r\n");
     writer.close();
     
 } catch (IOException e) {
