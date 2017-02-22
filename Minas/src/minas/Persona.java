@@ -24,10 +24,8 @@ import java.io.File;
 public class Persona {
 
    public static void creaxml() {
-       String uname = "";
-       uname = Minas.rename();
-       String puntos = "";
-       puntos = Minas.punts();
+       String uname = Minas.rename();
+       String puntos = Minas.punts();
     
       try {
          DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -49,7 +47,7 @@ public class Persona {
 
          // Puntuacio
          Element puntuacio = doc.createElement("puntuacion");
-         puntuacio.appendChild(doc.createTextNode("404"));
+         puntuacio.appendChild(doc.createTextNode(puntos));
          mina.appendChild(puntuacio);
          
          // write the content into xml file
