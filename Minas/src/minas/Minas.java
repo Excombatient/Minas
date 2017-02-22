@@ -34,6 +34,7 @@ public class Minas extends Application{
     @Override
     public void start(Stage primaryStage) {
         Persona user = new Persona();
+        text txt = new text();
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
@@ -80,6 +81,7 @@ public class Minas extends Application{
                   primaryStage.setScene(Aplication.getScene());
                   user.creaxml();
                   Puntuacio.leeXML();
+                  txt.createTXT();
             }
         });
         primaryStage.show();
