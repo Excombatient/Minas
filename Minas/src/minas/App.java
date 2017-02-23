@@ -8,8 +8,12 @@ package minas;
 import MapaMinas.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -38,10 +42,11 @@ import javafx.scene.control.Label;
 public class App extends MapaMinas implements Runnable{
     private Scene scene;
     private int sec=0;
-    private int NsPillao=0;
+    private int Cont=0;
     
-    public void build(){
+    public void build(StageManage<Stage> MainStage){
         List<String> bombs = new ArrayList<>();
+        Set<Rectangle> Detectades = new HashSet<Rectangle>();
         App.Random R = new App.Random();
         R.rand(bombs);
         Pane root = new Pane();
@@ -73,18 +78,26 @@ public class App extends MapaMinas implements Runnable{
                             btn.setStyle("-fx-base: #FF0000;");
                             btn.setCould(true);
                             btn.setUsed(true);
-                            if(btn.getMinas()==-1)
-                              NsPillao++;
+                            Detectades.add(btn);
                             
                         }else if(btn.isUsed() && btn.isCould()){
                             btn.setText("   ");
                             btn.setCould(false);
                             btn.setUsed(false);
                             btn.setStyle("-fx-base: #F0E7E7;");
-                            if(btn.getMinas()==-1)
-                              NsPillao--;
+                            Detectades.remove(btn);
                         }
-                        
+                    }
+                    if (Detectades.size()==20 || btn.getText().equals(" B ")){
+                        try {
+                            btn.setText(" B ");
+                            Thread.sleep(3000);
+                        } catch (InterruptedException ex) {
+                            System.out.println("Error on the sleep");
+                        }
+                        Minas.SetPunts((search(bombs,Detectades,Mapa)*10)-(sec/10));
+                        text.createTXT();
+                        leerTXT.EndStage(MainStage);
                     }
                 });
                 Mapa.put(btn.getPos(), btn);
@@ -108,6 +121,15 @@ public class App extends MapaMinas implements Runnable{
     return this.scene;
     }
 
+    public int search(List<String> Bomb, Set<Rectangle> Detect, Map<String,Rectangle> Map){
+    
+        for(int i=0; i!= Bomb.size();i++){
+            if(Detect.contains(Map.get(Bomb.get(i)))){
+                Cont++;
+            }
+        }
+        return Cont;
+    }
     
     @Override
     public void run() {
@@ -115,7 +137,7 @@ public class App extends MapaMinas implements Runnable{
         while(true){
             try{
                 sec++;
-                Thread.sleep(100);
+                Thread.sleep(1000);
             } catch (InterruptedException iex) {
                 System.out.println("Exception in var sec thread: "+iex.getMessage());
             }
@@ -124,8 +146,12 @@ public class App extends MapaMinas implements Runnable{
     
     class Random{
             public List<String> rand(List<String> A){
+                String Test;
                 for(int i = 0; i<20;i++){
-                   A.add(randomizer(0,16)+"-"+randomizer(0,19));
+                   do{
+                        Test = randomizer(0,16)+"-"+randomizer(0,19);
+                   }while(A.contains(Test));
+                   A.add(Test);
                    System.out.println(A.get(A.size()-1));
                 }
                 return A;
