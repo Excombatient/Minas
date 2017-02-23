@@ -7,31 +7,14 @@ package minas;
 
 import MapaMinas.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.beans.binding.Bindings;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 
@@ -51,14 +34,9 @@ public class App extends MapaMinas implements Runnable{
         R.rand(bombs);
         Pane root = new Pane();
         Label User = new Label();
-        Label Punt = new Label();
         User.setText("user: " + Minas.rename());
-        Punt.setText("punts: " + Minas.punts());
         User.setLayoutX(10);
         User.setLayoutY(10);
-        Punt.setLayoutX(400);
-        Punt.setLayoutY(10);
-        root.getChildren().add(Punt);
         root.getChildren().add(User);
         for(int i = 3;i<20;i++){
             for(int n = 0; n<20; n++){

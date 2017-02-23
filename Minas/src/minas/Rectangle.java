@@ -112,13 +112,7 @@ public class Rectangle extends Button implements Comparable<List<String>>{
         this.setStyle("-fx-base: #FFFFFF;");
         this.setUsed(true);
     }
-
-    @Override
-    protected Skin<?> createDefaultSkin() {
-        return super.createDefaultSkin(); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
+   
 
     @Override
     public int compareTo(List<String> other){
