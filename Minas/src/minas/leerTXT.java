@@ -33,7 +33,7 @@ import javax.swing.AbstractButton;
 public class leerTXT{
     private static final String FILENAME = "puntuacion.txt";
                 
-    public static void EndStage(StageManage<Stage> primaryStage, int Punts) {
+    public static void EndStage(StageManage<Stage> primaryStage) {
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
