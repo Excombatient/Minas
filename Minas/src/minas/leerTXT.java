@@ -30,11 +30,10 @@ import javax.swing.AbstractButton;
  *
  * @author JJ
  */
-public class leerTXT extends Application{
+public class leerTXT{
     private static final String FILENAME = "puntuacion.txt";
                 
-    @Override
-    public void start(Stage primaryStage) {
+    public static void EndStage(StageManage<Stage> primaryStage, int Punts) {
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -43,7 +42,7 @@ public class leerTXT extends Application{
         grid.setPadding(new Insets(25, 25, 25, 25));
         
         Scene scene = new Scene(grid, 300, 275);
-        primaryStage.setScene(scene);
+        primaryStage.getMainStage().setScene(scene);
         
         Text scenetitle = new Text("Puntuacion de Usuarios");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
@@ -83,11 +82,5 @@ public class leerTXT extends Application{
         System.out.println(listString);
         Text area  = new Text(listString);
         grid.add(area,0,5, 4, 4);
-
-        primaryStage.show();
     }
-
-    public static void main(String[] args) {
-        launch(args);
     }
-}   
