@@ -72,13 +72,11 @@ public class Minas extends Application{
             String u = userTextField.getText();
             name = u;
             System.out.println("user: " +name);
-                //actiontarget.setFill(Color.FIREBRICK);
-               // actiontarget.setText("Signed"+" "+userTextField.getText());
                   scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
                   App Aplication = new App();
                   Thread t = new Thread(Aplication);
                   t.start();
-                  Aplication.build();
+                  Aplication.build(Main);
                   primaryStage.setTitle("Buscaminas");
                   primaryStage.setScene(Aplication.getScene());
                   user.creaxml(); 
@@ -94,6 +92,10 @@ public class Minas extends Application{
     
     public static String rename(){
         return name;
+    }
+    
+    public static void SetPunts(int Punt){
+    punt = Integer.toString(Punt);
     }
     
     public static String punts(){
